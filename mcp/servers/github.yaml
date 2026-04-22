@@ -2,12 +2,12 @@ name: github
 description: "Full GitHub API — repos, PRs, issues, actions, code search (28k stars)"
 package: "github-mcp-server"
 transport: stdio
-command: docker
-args: ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"]
+command: npx
+args: ["-y", "@modelcontextprotocol/server-github"]
 env:
   GITHUB_PERSONAL_ACCESS_TOKEN: "${GITHUB_PERSONAL_ACCESS_TOKEN}"
 requires_api_key: true
 api_key_env: GITHUB_PERSONAL_ACCESS_TOKEN
 api_key_url: "https://github.com/settings/tokens"
-install_hint: "Requires Docker. Get free token at https://github.com/settings/tokens"
+install_hint: "Get free token at https://github.com/settings/tokens"
 tags: [github, git, code, developer]

@@ -90,7 +90,10 @@ Follow the prompts to choose a preset and enter API keys.
 | Linux | 完全支持 |
 | Windows | 需要 WSL2 |
 
-- Node.js 18+ (MCP 服务器运行时)
+- Node.js 18+ (npm/npx — 大多数 MCP 服务器)
+- uv (Python 工具运行器 — git/fetch/time 服务器需要)
+  - 安装: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  - Windows: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`
 - Python 3.8+ (安装脚本)
 - git
 

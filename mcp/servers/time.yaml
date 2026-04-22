@@ -1,12 +1,12 @@
 name: time
 description: "Time and timezone conversion capabilities"
-package: "@modelcontextprotocol/server-time"
+package: "mcp-server-time"
 transport: stdio
-command: npx
-args: ["-y", "@modelcontextprotocol/server-time"]
+command: uvx
+args: ["mcp-server-time"]
 env: {}
 requires_api_key: false
 api_key_env: ""
 api_key_url: ""
-install_hint: "No setup needed."
+install_hint: "Requires uv: curl -LsSf https://astral.sh/uv/install.sh | sh"
 tags: [time, timezone, core]
