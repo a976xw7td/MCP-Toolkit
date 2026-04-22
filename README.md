@@ -4,7 +4,7 @@
 
 **One-click AI toolkit — 11 MCP servers + 11 skills + 205 expert agents**
 
-支持 Claude Code、Hermes、OpenClaw | Works with Claude Code, Hermes, OpenClaw
+支持 Claude Code、Codex、Hermes、OpenClaw | Works with Claude Code, Codex, Hermes, OpenClaw
 
 ---
 
@@ -13,11 +13,42 @@
 ```bash
 git clone --recurse-submodules https://github.com/a976xw7td/MCP-Toolkit.git
 cd MCP-Toolkit
-bash scripts/install.sh
+bash scripts/install.sh   # macOS / Linux / Windows Git Bash 或 WSL2
 ```
 
-按照提示选择预设方案并输入 API 密钥即可。  
-Follow the prompts to choose a preset and enter API keys.
+按照提示选择预设方案并输入 API 密钥即可（约 2 分钟）。  
+Follow the prompts to choose a preset and enter API keys (~2 minutes).
+
+---
+
+## 平台兼容性 / Platform Compatibility
+
+### 安装脚本 / install.sh
+
+| 系统 | 运行方式 | 说明 |
+|------|---------|------|
+| macOS | 直接运行 | 完全支持 |
+| Linux | 直接运行 | 完全支持 |
+| Windows | Git Bash 或 WSL2 | 原生 CMD / PowerShell 不支持 bash |
+
+> **Windows 用户**：安装 [Git for Windows](https://git-scm.com/download/win) 即可获得 Git Bash，右键文件夹选"Git Bash Here"运行脚本。
+
+### Agent 支持情况 / Agent Support
+
+| Agent | macOS | Linux | Windows | 备注 |
+|-------|-------|-------|---------|------|
+| **Claude Code** | ✅ | ✅ | ✅ | Windows 安装脚本需 Git Bash/WSL2 |
+| **Codex** | ✅ | ✅ | ✅ | Windows 安装脚本需 Git Bash/WSL2 |
+| **Hermes** | ✅ | ✅ | ❌ | Hermes 本身不支持 Windows |
+| **OpenClaw** | ✅ | ✅ | ✅ | 仅安装技能；角色系统架构不同，205 个角色不适用 |
+
+### 安装内容对照 / What Gets Installed
+
+| 内容 | Claude Code | Codex | Hermes | OpenClaw |
+|------|-------------|-------|--------|----------|
+| 11 个技能 | ✅ | ✅ | ✅ | ✅ |
+| MCP 服务器配置 | ✅ | ✅ | ✅ | ⚠️ 插件系统不同，需手动配置 |
+| 205 个专家角色 | ✅ | ✅ | ✅ | ❌ OpenClaw 为单 workspace 架构，不支持多角色 |
 
 ---
 
@@ -25,19 +56,19 @@ Follow the prompts to choose a preset and enter API keys.
 
 ### MCP 服务器 / MCP Servers (11 个)
 
-| 服务器 | 功能 | API 密钥 |
-|--------|------|---------|
-| filesystem | 读写本地文件 | 无需 |
-| git | Git 操作 | 无需 |
-| memory | 跨会话记忆 | 无需 |
-| sequential-thinking | 结构化推理 | 无需 |
-| fetch | 网页内容抓取 | 无需 |
-| time | 时区/时间 | 无需 |
-| desktop-commander | 终端命令执行 | 无需 |
-| context7 | 实时库文档注入 | 无需 |
-| github | GitHub 仓库操作 | GitHub PAT (免费) |
-| brave-search | 网络搜索 | Brave API (免费层) |
-| firecrawl | 深度网页爬取 | Firecrawl API (免费层) |
+| 服务器 | 功能 | 运行时 | API 密钥 |
+|--------|------|--------|---------|
+| filesystem | 读写本地文件 | npx | 无需 |
+| git | Git 操作 | uvx | 无需 |
+| memory | 跨会话记忆 | npx | 无需 |
+| sequential-thinking | 结构化推理 | npx | 无需 |
+| fetch | 网页内容抓取 | uvx | 无需 |
+| time | 时区/时间 | uvx | 无需 |
+| desktop-commander | 终端命令执行 | npx | 无需 |
+| context7 | 实时库文档注入 | npx | 无需 |
+| github | GitHub 仓库操作 | npx | GitHub PAT (免费) |
+| brave-search | 网络搜索 | npx | Brave API (免费层) |
+| firecrawl | 深度网页爬取 | npx | Firecrawl API (免费层) |
 
 ### 技能 / Skills (11 个)
 
@@ -61,6 +92,8 @@ Follow the prompts to choose a preset and enter API keys.
 
 工程 · 设计 · 营销 · 销售 · 金融 · 产品 · 测试 · 游戏开发 · 安全 · 学术 · 更多
 
+> 安装后位于 `~/.claude/agents/`（Claude Code）和 `~/.codex/rules/`（Codex）。
+
 ---
 
 ## 预设方案 / Presets
@@ -68,12 +101,12 @@ Follow the prompts to choose a preset and enter API keys.
 ### minimal（推荐新手）
 - 无需任何 API 密钥
 - 8 个 MCP 服务器
-- 安装包约 50MB
+- 首次运行下载约 80–120 MB
 
 ### developer（推荐开发者）
 - 需要免费 GitHub Personal Access Token
 - 10 个 MCP 服务器（新增 GitHub + 搜索）
-- 获取地址：https://github.com/settings/tokens
+- 获取地址：https://github.com/settings/tokens（权限：repo, read:user）
 
 ### full（全功能）
 - 需要 GitHub PAT
@@ -82,20 +115,16 @@ Follow the prompts to choose a preset and enter API keys.
 
 ---
 
-## 系统要求 / Requirements
+## 前置依赖 / Requirements
 
-| 平台 | 支持情况 |
-|------|---------|
-| macOS | 完全支持 |
-| Linux | 完全支持 |
-| Windows | 需要 WSL2 |
+| 依赖 | 用途 | 安装 |
+|------|------|------|
+| Node.js 18+ | 运行 npx 类 MCP 服务器 | https://nodejs.org |
+| uv | 运行 uvx 类 MCP 服务器（git/fetch/time）| `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| Python 3.8+ | 安装脚本内部使用 | 通常已预装 |
+| git | 克隆本仓库 | https://git-scm.com |
 
-- Node.js 18+ (npm/npx — 大多数 MCP 服务器)
-- uv (Python 工具运行器 — git/fetch/time 服务器需要)
-  - 安装: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-  - Windows: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`
-- Python 3.8+ (安装脚本)
-- git
+**Windows 额外要求**：Git Bash（随 Git for Windows 附带）或 WSL2，用于运行 bash 安装脚本。MCP 服务器本身原生支持 Windows。
 
 ---
 
@@ -126,28 +155,41 @@ security-review src/api/
 deep-dive 支付处理模块是怎么工作的
 ```
 
-### 用 205 个专家智能体
-打开 `agents/` 目录，找到你需要的专家，复制其提示词到你的 agent 中。
+### 激活专家角色（Claude Code / Codex）
+```
+用 Backend Architect 帮我设计这个项目的数据库结构
+用 UI Designer 帮我生成一个漂亮的 HTML 报告模板
+```
 
 ---
 
 ## 手动安装 / Manual Install
 
-如果自动安装脚本遇到问题，可以手动操作：
+如果自动安装脚本遇到问题：
 
 **Claude Code:**
 ```bash
-# 1. 拷贝技能文件
-cp -r skills/* ~/.claude/skills/
-
-# 2. 合并 MCP 配置（先运行 convert.sh 生成）
 bash scripts/convert.sh minimal
-# 然后将 integrations/claude-code/mcp-config.json 的内容
-# 合并到 ~/Library/Application Support/Claude/claude_desktop_config.json
+# 技能
+cp -r integrations/claude-code/skills/* ~/.claude/skills/
+# 角色
+mkdir -p ~/.claude/agents
+find agents -name "*.md" ! -path "*/integrations/*" ! -path "*README*" \
+  ! -path "*/strategy/*" ! -path "*/scripts/*" \
+  -exec cp {} ~/.claude/agents/ \;
+# MCP 配置：将 integrations/claude-code/mcp-config.json 内容合并到 ~/.claude.json
+```
+
+**Codex:**
+```bash
+bash scripts/convert.sh minimal
+cp -r integrations/codex/skills/* ~/.codex/skills/
+# MCP 配置：将 integrations/codex/mcp-config.toml 内容追加到 ~/.codex/config.toml
 ```
 
 **Hermes:**
 ```bash
+bash scripts/convert.sh minimal
 cp -r integrations/hermes/skills/* ~/.hermes/skills/
 cp integrations/hermes/mcp-config.yaml ~/.hermes/mcp-config.yaml
 hermes reload
