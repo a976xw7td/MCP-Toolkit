@@ -1,0 +1,12 @@
+name: desktop-commander
+description: "Terminal control, process management, and diff-based file editing (5.3k stars)"
+package: "@wonderwhy-er/desktop-commander"
+transport: stdio
+command: npx
+args: ["-y", "@wonderwhy-er/desktop-commander"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed."
+tags: [terminal, shell, files, automation]

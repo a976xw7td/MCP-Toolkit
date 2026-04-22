@@ -1,0 +1,12 @@
+name: sequential-thinking
+description: "Dynamic and reflective problem-solving through thought sequences"
+package: "@modelcontextprotocol/server-sequential-thinking"
+transport: stdio
+command: npx
+args: ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed."
+tags: [reasoning, thinking, core]

@@ -1,0 +1,13 @@
+name: brave-search
+description: "Web search via Brave Search API"
+package: "@brave/search-mcp"
+transport: stdio
+command: npx
+args: ["-y", "@brave/search-mcp"]
+env:
+  BRAVE_API_KEY: "${BRAVE_API_KEY}"
+requires_api_key: true
+api_key_env: BRAVE_API_KEY
+api_key_url: "https://api.search.brave.com/register"
+install_hint: "Free tier: 2000 queries/month."
+tags: [search, web, research]

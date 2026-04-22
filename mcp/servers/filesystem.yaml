@@ -1,0 +1,12 @@
+name: filesystem
+description: "Secure file read/write with configurable access controls"
+package: "@modelcontextprotocol/server-filesystem"
+transport: stdio
+command: npx
+args: ["-y", "@modelcontextprotocol/server-filesystem", "${HOME}"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed."
+tags: [files, core]

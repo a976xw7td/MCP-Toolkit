@@ -1,0 +1,12 @@
+name: context7
+description: "Injects real-time library docs into prompts — eliminates hallucinated APIs"
+package: "@upstash/context7-mcp"
+transport: stdio
+command: npx
+args: ["-y", "@upstash/context7-mcp@latest"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed. Free service."
+tags: [docs, research, coding, developer]

@@ -1,0 +1,17 @@
+name: developer
+description: "Full developer toolkit. Requires a free GitHub Personal Access Token."
+servers:
+  - filesystem
+  - git
+  - memory
+  - sequential-thinking
+  - fetch
+  - time
+  - desktop-commander
+  - context7
+  - github
+  - brave-search
+required_keys:
+  - GITHUB_PERSONAL_ACCESS_TOKEN
+optional_keys:
+  - BRAVE_API_KEY

@@ -1,0 +1,13 @@
+name: minimal
+description: "Zero API keys needed. Core file, memory, and reasoning tools."
+servers:
+  - filesystem
+  - git
+  - memory
+  - sequential-thinking
+  - fetch
+  - time
+  - desktop-commander
+  - context7
+required_keys: []
+optional_keys: []

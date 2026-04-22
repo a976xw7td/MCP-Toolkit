@@ -1,0 +1,12 @@
+name: fetch
+description: "Web content fetching and conversion to markdown for LLM usage"
+package: "@modelcontextprotocol/server-fetch"
+transport: stdio
+command: npx
+args: ["-y", "@modelcontextprotocol/server-fetch"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed."
+tags: [web, fetch, core]

@@ -1,0 +1,13 @@
+name: firecrawl
+description: "Web scraping, URL crawling, and structured data extraction"
+package: "firecrawl-mcp"
+transport: stdio
+command: npx
+args: ["-y", "firecrawl-mcp"]
+env:
+  FIRECRAWL_API_KEY: "${FIRECRAWL_API_KEY}"
+requires_api_key: true
+api_key_env: FIRECRAWL_API_KEY
+api_key_url: "https://www.firecrawl.dev"
+install_hint: "Free tier available at https://www.firecrawl.dev"
+tags: [scraping, web, research, data]

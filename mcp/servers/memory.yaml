@@ -1,0 +1,12 @@
+name: memory
+description: "Knowledge graph-based persistent memory across sessions"
+package: "@modelcontextprotocol/server-memory"
+transport: stdio
+command: npx
+args: ["-y", "@modelcontextprotocol/server-memory"]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "No setup needed."
+tags: [memory, persistence, core]

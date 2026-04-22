@@ -1,0 +1,19 @@
+name: full
+description: "Everything. All 11 MCP servers enabled."
+servers:
+  - filesystem
+  - git
+  - memory
+  - sequential-thinking
+  - fetch
+  - time
+  - desktop-commander
+  - context7
+  - github
+  - brave-search
+  - firecrawl
+required_keys:
+  - GITHUB_PERSONAL_ACCESS_TOKEN
+optional_keys:
+  - BRAVE_API_KEY
+  - FIRECRAWL_API_KEY

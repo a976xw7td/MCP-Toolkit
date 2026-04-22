@@ -1,0 +1,12 @@
+name: git
+description: "Read, search, and manipulate local Git repositories"
+package: "mcp-server-git"
+transport: stdio
+command: uvx
+args: ["mcp-server-git", "--repository", "."]
+env: {}
+requires_api_key: false
+api_key_env: ""
+api_key_url: ""
+install_hint: "Requires uv: curl -LsSf https://astral.sh/uv/install.sh | sh"
+tags: [git, vcs, core]
