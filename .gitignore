@@ -1,7 +1,37 @@
+# Environment & secrets — NEVER commit these
 .env
-*.bak
+*.env.local
+
+# Generated integration files
 integrations/
+
+# Python artifacts
 __pycache__/
 *.pyc
+*.pyo
+.Python
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OMC state
 .omc/
+
+# Backup files
+*.bak
+*.orig
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Docker build context artifacts
+.dockerignore

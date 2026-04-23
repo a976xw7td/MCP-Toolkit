@@ -1,0 +1,84 @@
+# MCP-Toolkit docker-compose.yml
+# Two deployment modes:
+#   Mode 1 — stdio installer:  docker compose run --rm install
+#   Mode 2 — SSE/HTTP servers: docker compose up mcp-filesystem mcp-memory
+
+name: mcp-toolkit
+
+# ── Shared config ──────────────────────────────────────────────────────────────
+x-node-base: &node-base
+  image: node:20-alpine
+  restart: unless-stopped
+
+# ── Services ───────────────────────────────────────────────────────────────────
+services:
+
+  # ─── Mode 1: One-shot installer ─────────────────────────────────────────────
+  # Writes MCP configs and skills directly into the host agent directories.
+  # Usage:  docker compose run --rm install
+  install:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ${HOME}/.claude:/root/.claude          # Claude Code config
+      - ${HOME}/.codex:/root/.codex            # Codex config
+      - ${HOME}/.hermes:/root/.hermes          # Hermes config
+      - ./agents:/toolkit/agents:ro            # agents submodule (read-only)
+      - ${MCP_FS_SANDBOX:-./workspace}:/workspace
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PRESET: ${PRESET:-minimal}
+      MCP_FS_SANDBOX: /workspace
+      GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_PERSONAL_ACCESS_TOKEN:-}
+      BRAVE_API_KEY: ${BRAVE_API_KEY:-}
+      FIRECRAWL_API_KEY: ${FIRECRAWL_API_KEY:-}
+    stdin_open: true
+    tty: true
+
+  # ─── Mode 2: MCP servers via SSE/HTTP transport ──────────────────────────────
+  # Exposes stdio MCP servers over HTTP using supergateway.
+  # Useful for: remote agents, Claude Desktop remote config, team-shared MCP.
+  # Connect from Claude Desktop: add "url": "http://localhost:PORT/sse" to mcpServers.
+
+  mcp-filesystem:
+    <<: *node-base
+    command: >
+      sh -c "npx -y supergateway
+        --stdio 'node /usr/local/lib/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js /workspace'
+        --port 3001 --cors --name filesystem"
+    ports:
+      - "${MCP_FILESYSTEM_PORT:-3001}:3001"
+    volumes:
+      - ${MCP_FS_SANDBOX:-./workspace}:/workspace:ro
+    environment:
+      MCP_FS_SANDBOX: /workspace
+
+  mcp-memory:
+    <<: *node-base
+    command: >
+      sh -c "npx -y supergateway
+        --stdio 'npx -y @modelcontextprotocol/server-memory'
+        --port 3002 --cors --name memory"
+    ports:
+      - "${MCP_MEMORY_PORT:-3002}:3002"
+
+  mcp-sequential-thinking:
+    <<: *node-base
+    command: >
+      sh -c "npx -y supergateway
+        --stdio 'npx -y @modelcontextprotocol/server-sequential-thinking'
+        --port 3003 --cors --name sequential-thinking"
+    ports:
+      - "${MCP_SEQ_THINKING_PORT:-3003}:3003"
+
+  mcp-context7:
+    <<: *node-base
+    command: >
+      sh -c "npx -y supergateway
+        --stdio 'npx -y @upstash/context7-mcp@latest'
+        --port 3004 --cors --name context7"
+    ports:
+      - "${MCP_CONTEXT7_PORT:-3004}:3004"
