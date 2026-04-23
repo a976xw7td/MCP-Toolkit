@@ -1,12 +1,16 @@
 name: filesystem
-description: "Secure file read/write with configurable access controls"
+description: "Sandboxed file read/write — access restricted to MCP_FS_SANDBOX (default: ~/projects)"
 package: "@modelcontextprotocol/server-filesystem"
 transport: stdio
 command: npx
-args: ["-y", "@modelcontextprotocol/server-filesystem", "${HOME}"]
-env: {}
+args: ["-y", "@modelcontextprotocol/server-filesystem", "${MCP_FS_SANDBOX}"]
+env:
+  MCP_FS_SANDBOX: "${MCP_FS_SANDBOX}"
 requires_api_key: false
 api_key_env: ""
 api_key_url: ""
-install_hint: "No setup needed."
-tags: [files, core]
+install_hint: |
+  Set MCP_FS_SANDBOX in .env to restrict filesystem access.
+  Must be a path within $HOME. Default: ~/projects
+  Security: use the most restrictive path that fits your workflow.
+tags: [files, core, sandboxed]
